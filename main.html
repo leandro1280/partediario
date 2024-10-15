@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parte Diario General</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script async defer src="https://apis.google.com/js/api.js"
+        onload="this.onload=function(){};handleClientLoad()"
+        onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">PARTE DIARIO GENERAL Nº</h2>
+        <form id="formulario">
+            <!-- Establecimiento y Fecha -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="establecimiento" class="form-label">Establecimiento</label>
+                    <input type="text" class="form-control" id="establecimiento" placeholder="Ingrese el establecimiento">
+                </div>
+                <div class="col-md-3">
+                    <label for="dia" class="form-label">Día</label>
+                    <input type="text" class="form-control" id="dia" placeholder="Día">
+                </div>
+                <div class="col-md-3">
+                    <label for="mes" class="form-label">Mes</label>
+                    <input type="text" class="form-control" id="mes" placeholder="Mes">
+                </div>
+            </div>
+
+            <!-- Señor/a y Presente -->
+            <div class="mb-3">
+                <label for="senior" class="form-label">Señor/a:</label>
+                <textarea class="form-control" id="senior" rows="3" placeholder="Escriba su mensaje"></textarea>
+            </div>
+
+            <!-- Novedades del Personal - Docentes -->
+            <h5 class="mt-4">Novedades del Personal - Docentes</h5>
+            <div id="docente-container">
+                <div class="row mb-3 docente-row">
+                    <div class="col-md-3">
+                        <label for="docente" class="form-label">Docente</label>
+                        <input type="text" class="form-control" name="docente" placeholder="Apellido y Nombre">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="materia" class="form-label">Materia</label>
+                        <input type="text" class="form-control" name="materia" placeholder="Materia">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="turno" class="form-label">Turno</label>
+                        <input type="text" class="form-control" name="turno" placeholder="Turno">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="grado" class="form-label">Grado</label>
+                        <input type="text" class="form-control" name="grado" placeholder="Grado">
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-secondary mb-3" id="add-docente">Agregar Docente</button>
+
+            <!-- Personal de Cargo -->
+            <h5 class="mt-4">Personal de Cargo</h5>
+            <div id="cargo-container">
+                <div class="row mb-3 cargo-row">
+                    <div class="col-md-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre-cargo" placeholder="Nombre">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" name="apellido-cargo" placeholder="Apellido">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="funcion" class="form-label">Función</label>
+                        <input type="text" class="form-control" name="funcion-cargo" placeholder="Función">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="turno" class="form-label">Turno</label>
+                        <input type="text" class="form-control" name="turno-cargo" placeholder="Turno">
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-secondary mb-3" id="add-cargo">Agregar Personal de Cargo</button>
+
+            <!-- Personal Auxiliar -->
+            <h5 class="mt-4">Personal Auxiliar</h5>
+            <div id="auxiliar-container">
+                <div class="row mb-3 auxiliar-row">
+                    <div class="col-md-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre-auxiliar" placeholder="Nombre">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" name="apellido-auxiliar" placeholder="Apellido">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="funcion" class="form-label">Función</label>
+                        <input type="text" class="form-control" name="funcion-auxiliar" placeholder="Función">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="turno" class="form-label">Turno</label>
+                        <input type="text" class="form-control" name="turno-auxiliar" placeholder="Turno">
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-secondary mb-3" id="add-auxiliar">Agregar Personal Auxiliar</button>
+
+            <!-- Botón para generar PDF -->
+            <button type="button" class="btn btn-primary" onclick="generarPDF()">Generar PDF</button>
+        </form>
+    </div>
+
+    <script src="functions.js"></script>
+</body>
+</html>
