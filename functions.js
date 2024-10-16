@@ -44,13 +44,14 @@ function updateSigninStatus(isSignedIn) {
  * Genera un PDF a partir de los datos ingresados en el formulario.
  */
 function generarPDF() {
-    const { jsPDF } = window.jspdf;
+   
 
+    const { jsPDF } = window.jspdf || {};
     if (!jsPDF) {
         alert("No se pudo cargar la librería jsPDF.");
         return;
     }
-
+    var doc = new jsPDF('portrait', 'pt', 'a4');
     var doc = new jsPDF('portrait', 'pt', 'a4');
 
     var dia = document.getElementById('dia').value;
