@@ -3,6 +3,8 @@ var API_KEY = 'AIzaSyCInaRqjOSiTYftuncEHWDD1yNNaHov2tQ'; // Reemplaza con tu API
 
 var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
 var SCOPES = "https://www.googleapis.com/auth/drive.file";
+var SCOPES = "https://www.googleapis.com/auth/drive";
+
 
 /**
  * Carga el cliente de la API cuando se carga la página.
