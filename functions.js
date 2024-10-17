@@ -2,7 +2,6 @@ var CLIENT_ID = '1068808819946-1260pdq2v329p9n6j7dhdvm4uokpsd10.apps.googleuserc
 var API_KEY = 'AIzaSyCInaRqjOSiTYftuncEHWDD1yNNaHov2tQ'; // Reemplaza con tu API Key
 
 var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
-var SCOPES = "https://www.googleapis.com/auth/drive.file";
 var SCOPES = "https://www.googleapis.com/auth/drive";
 
 
