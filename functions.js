@@ -116,10 +116,15 @@ function uploadFileToDrive(pdfBase64, dia) {
         'body': multipartRequestBody
     });
 
-    request.execute(function (file) {
+request.execute(function (file) {
+    if (file.error) {
+        console.error('Error al subir archivo:', file.error);
+    } else {
         console.log('Archivo subido a Google Drive:', file);
         alert('Archivo guardado en Google Drive con éxito.');
-    });
+    }
+});
+
 }
 
 // Función para agregar nuevos campos de docentes, personal de cargo y personal auxiliar
