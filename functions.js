@@ -206,3 +206,51 @@ document.addEventListener('DOMContentLoaded', function () {
         container.appendChild(newAuxiliarRow);
     });
 });
+
+function uploadFileToDrive(pdfBase64, dia) {
+    if (!gapi.auth2.getAuthInstance().isSignedIn.get()) {
+        alert("Por favor, autentícate antes de intentar subir el archivo.");
+        return;
+    }
+    
+    var boundary = '-------314159265358979323846';
+    var delimiter = "\r\n--" + boundary + "\r\n";
+    var close_delim = "\r\n--" + boundary + "--";
+
+    var contentType = 'application/pdf';
+    var metadata = {
+        'name': `parte-diario-${dia}.pdf`,
+        'mimeType': contentType
+    };
+
+    var multipartRequestBody =
+        delimiter +
+        'Content-Type: application/json; charset=UTF-8\r\n\r\n' +
+        JSON.stringify(metadata) +
+        delimiter +
+        'Content-Type: ' + contentType + '\r\n' +
+        'Content-Transfer-Encoding: base64\r\n' +
+        '\r\n' +
+        pdfBase64 +
+        close_delim;
+
+    var request = gapi.client.request({
+        'path': '/upload/drive/v3/files',
+        'method': 'POST',
+        'params': { 'uploadType': 'multipart' },
+        'headers': {
+            'Content-Type': 'multipart/related; boundary="' + boundary + '"'
+        },
+        'body': multipartRequestBody
+    });
+
+    request.execute(function (file) {
+        if (file.error) {
+            console.error('Error al subir archivo:', file.error);
+            alert('Error al subir archivo: ' + file.error.message);
+        } else {
+            console.log('Archivo subido a Google Drive:', file);
+            alert('Archivo guardado en Google Drive con éxito.');
+        }
+    });
+}
