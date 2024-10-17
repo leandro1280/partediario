@@ -253,3 +253,21 @@ function uploadFileToDrive(pdfBase64, dia) {
         }
     });
 }
+function updateSigninStatus(isSignedIn) {
+    if (isSignedIn) {
+        console.log("Autenticado en Google Drive.");
+        document.getElementById('auth-button').style.display = 'none';
+        document.getElementById('signout-button').style.display = 'block';
+    } else {
+        document.getElementById('auth-button').style.display = 'block';
+        document.getElementById('signout-button').style.display = 'none';
+    }
+}
+
+function handleAuthClick() {
+    gapi.auth2.getAuthInstance().signIn();
+}
+
+function handleSignoutClick() {
+    gapi.auth2.getAuthInstance().signOut();
+}
