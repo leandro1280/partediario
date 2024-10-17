@@ -112,6 +112,9 @@
 
     <!-- Librerías JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <button id="auth-button" style="display: none;" onclick="handleAuthClick()">Autenticarse con Google</button>
+<button id="signout-button" style="display: none;" onclick="handleSignoutClick()">Cerrar sesión</button>
+
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
