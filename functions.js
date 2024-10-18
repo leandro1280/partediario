@@ -8,7 +8,7 @@ function generarPDF() {
     }
 
     // Crear un nuevo documento PDF
-    var doc = new jsPDF('portrait', 'pt', 'a4');  // Define la variable doc aquí
+    var doc = new jsPDF('portrait', 'pt', 'a4');
 
     // Obtener los datos del formulario
     var dia = document.getElementById('dia').value;
@@ -35,7 +35,7 @@ function generarPDF() {
     doc.text("Señor/a: " + senior, x, y);
 
     // Descargar el PDF
-    doc.save(`parte-diario-${dia}-${mes}.pdf`);
+    doc.save(parte-diario-${dia}.pdf);
 }
 
 // Función para agregar nuevos campos de docentes, personal de cargo y personal auxiliar
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let container = document.getElementById('docente-container');
         let newDocenteRow = document.createElement('div');
         newDocenteRow.classList.add('row', 'mb-3', 'docente-row');
-        newDocenteRow.innerHTML = `
+        newDocenteRow.innerHTML = 
             <div class="col-md-3">
                 <label for="docente" class="form-label">Docente</label>
                 <input type="text" class="form-control" name="docente" placeholder="Apellido y Nombre">
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <label for="grado" class="form-label">Grado</label>
                 <input type="text" class="form-control" name="grado" placeholder="Grado">
             </div>
-        `;
+        ;
         container.appendChild(newDocenteRow);
     });
 
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let container = document.getElementById('cargo-container');
         let newCargoRow = document.createElement('div');
         newCargoRow.classList.add('row', 'mb-3', 'cargo-row');
-        newCargoRow.innerHTML = `
+        newCargoRow.innerHTML = 
             <div class="col-md-3">
                 <label for="nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" name="nombre-cargo" placeholder="Nombre">
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <label for="turno" class="form-label">Turno</label>
                 <input type="text" class="form-control" name="turno-cargo" placeholder="Turno">
             </div>
-        `;
+        ;
         container.appendChild(newCargoRow);
     });
 
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let container = document.getElementById('auxiliar-container');
         let newAuxiliarRow = document.createElement('div');
         newAuxiliarRow.classList.add('row', 'mb-3', 'auxiliar-row');
-        newAuxiliarRow.innerHTML = `
+        newAuxiliarRow.innerHTML = 
             <div class="col-md-3">
                 <label for="nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" name="nombre-auxiliar" placeholder="Nombre">
@@ -111,10 +111,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 <label for="turno" class="form-label">Turno</label>
                 <input type="text" class="form-control" name="turno-auxiliar" placeholder="Turno">
             </div>
-        `;
+        ;
         container.appendChild(newAuxiliarRow);
     });
+}); ESTE ES MI JS
 
-    // Evento del botón para generar PDF
-    document.querySelector('button[onclick="generarPDF()"]').addEventListener('click', generarPDF);
-});
