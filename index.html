@@ -15,22 +15,12 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="establecimiento" class="form-label">Establecimiento</label>
-                    <input type="text" class="form-control" id="establecimiento" placeholder="Ingrese el establecimiento">
+                    <input type="text" class="form-control" id="establecimiento" value="Escuela Número 54" readonly>
                 </div>
-                <div class="col-md-3">
-                    <label for="dia" class="form-label">Día</label>
-                    <input type="text" class="form-control" id="dia" placeholder="Día">
+                <div class="col-md-6">
+                    <label for="fecha" class="form-label">Fecha</label>
+                    <input type="date" class="form-control" id="fecha">
                 </div>
-                <div class="col-md-3">
-                    <label for="mes" class="form-label">Mes</label>
-                    <input type="text" class="form-control" id="mes" placeholder="Mes">
-                </div>
-            </div>
-
-            <!-- Señor/a y Presente -->
-            <div class="mb-3">
-                <label for="senior" class="form-label">Señor/a:</label>
-                <textarea class="form-control" id="senior" rows="3" placeholder="Escriba su mensaje"></textarea>
             </div>
 
             <!-- Novedades del Personal - Docentes -->
@@ -46,12 +36,20 @@
                         <input type="text" class="form-control" name="materia" placeholder="Materia">
                     </div>
                     <div class="col-md-2">
-                        <label for="turno" class="form-label">Turno</label>
-                        <input type="text" class="form-control" name="turno" placeholder="Turno">
-                    </div>
-                    <div class="col-md-2">
                         <label for="grado" class="form-label">Grado</label>
                         <input type="text" class="form-control" name="grado" placeholder="Grado">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="turno" class="form-label">Turno</label>
+                        <input type="text" class="form-control" name="turno" placeholder="Turno" readonly>
+                    </div>
+                    <div class="col-md-1">
+                        <label for="modulos" class="form-label">Módulos</label>
+                        <input type="number" class="form-control" name="modulos" placeholder="Cantidad">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="motivo" class="form-label">Motivo</label>
+                        <input type="text" class="form-control" name="motivo-docente" placeholder="Motivo">
                     </div>
                 </div>
             </div>
@@ -94,8 +92,8 @@
                         <input type="text" class="form-control" name="apellido-auxiliar" placeholder="Apellido">
                     </div>
                     <div class="col-md-3">
-                        <label for="funcion" class="form-label">Función</label>
-                        <input type="text" class="form-control" name="funcion-auxiliar" placeholder="Función">
+                        <label for="motivo" class="form-label">Motivo</label>
+                        <input type="text" class="form-control" name="motivo-auxiliar" placeholder="Motivo">
                     </div>
                     <div class="col-md-3">
                         <label for="turno" class="form-label">Turno</label>
@@ -105,16 +103,19 @@
             </div>
             <button type="button" class="btn btn-secondary mb-3" id="add-auxiliar">Agregar Personal Auxiliar</button>
 
+            <!-- Contraseña para generar PDF -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña para Generar PDF:</label>
+                <input type="password" class="form-control" id="password" placeholder="Ingrese la contraseña">
+            </div>
+
             <!-- Botón para generar PDF -->
             <button type="button" class="btn btn-primary" onclick="generarPDF()">Generar PDF</button>
-            
-            <!-- Botones de autenticación -->
         </form>
     </div>
 
     <!-- Librerías JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script async defer src="https://apis.google.com/js/api.js" onload="handleClientLoad()"></script>
     <script src="functions.js"></script>
 </body>
 </html>
