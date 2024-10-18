@@ -39,9 +39,13 @@ function generarPDF() {
     // Información del Establecimiento y Fecha
     doc.setFontSize(12);
     doc.setFont('helvetica', 'normal');
-    doc.text(`Establecimiento: ${establecimiento}`, x, y);
+    doc.text("Establecimiento:", x, y);
     y += 20;
-    doc.text(`Fecha: ${fecha}`, x, y);
+    doc.text(establecimiento, x + 20, y);
+    y += 20;
+    doc.text("Fecha:", x, y);
+    y += 20;
+    doc.text(fecha, x + 20, y);
     y += 30;
 
     // Docentes
@@ -58,37 +62,37 @@ function generarPDF() {
         let modulos = row.querySelector('input[name="modulos"]').value;
         let motivo = row.querySelector('input[name="motivo-docente"]').value;
 
-        // Mostrar la información en líneas separadas
+        // Mostrar la información en líneas separadas, con la etiqueta arriba y el valor abajo
         if (docente) {
-            doc.text(`Docente:`, x, y);
+            doc.text("Docente:", x, y);
             y += 20;
-            doc.text(`${docente}`, x + 20, y);
-            y += 20;
-
-            doc.text(`Materia:`, x, y);
-            y += 20;
-            doc.text(`${materia}`, x + 20, y);
+            doc.text(docente, x + 20, y);
             y += 20;
 
-            doc.text(`Grado:`, x, y);
+            doc.text("Materia:", x, y);
             y += 20;
-            doc.text(`${grado}`, x + 20, y);
-            y += 20;
-
-            doc.text(`Turno:`, x, y);
-            y += 20;
-            doc.text(`${turno}`, x + 20, y);
+            doc.text(materia, x + 20, y);
             y += 20;
 
-            doc.text(`Módulos:`, x, y);
+            doc.text("Grado:", x, y);
             y += 20;
-            doc.text(`${modulos}`, x + 20, y);
+            doc.text(grado, x + 20, y);
             y += 20;
 
-            doc.text(`Motivo:`, x, y);
+            doc.text("Turno:", x, y);
             y += 20;
-            doc.text(`${motivo}`, x + 20, y);
-            y += 30; // Añadir espacio extra entre cada docente
+            doc.text(turno, x + 20, y);
+            y += 20;
+
+            doc.text("Módulos:", x, y);
+            y += 20;
+            doc.text(modulos, x + 20, y);
+            y += 20;
+
+            doc.text("Motivo:", x, y);
+            y += 20;
+            doc.text(motivo, x + 20, y);
+            y += 40; // Añadir espacio extra entre cada docente
         }
     });
 
@@ -104,22 +108,22 @@ function generarPDF() {
         let funcion = row.querySelector('input[name="funcion-cargo"]').value;
         let turno = row.querySelector('input[name="turno-cargo"]').value;
 
-        // Mostrar la información en líneas separadas
+        // Mostrar la información en líneas separadas, con la etiqueta arriba y el valor abajo
         if (nombre || apellido || funcion || turno) {
-            doc.text(`Nombre:`, x, y);
+            doc.text("Nombre:", x, y);
             y += 20;
             doc.text(`${nombre} ${apellido}`, x + 20, y);
             y += 20;
 
-            doc.text(`Función:`, x, y);
+            doc.text("Función:", x, y);
             y += 20;
-            doc.text(`${funcion}`, x + 20, y);
+            doc.text(funcion, x + 20, y);
             y += 20;
 
-            doc.text(`Turno:`, x, y);
+            doc.text("Turno:", x, y);
             y += 20;
-            doc.text(`${turno}`, x + 20, y);
-            y += 30; // Añadir espacio extra entre cada personal de cargo
+            doc.text(turno, x + 20, y);
+            y += 40; // Añadir espacio extra entre cada personal de cargo
         }
     });
 
@@ -135,26 +139,25 @@ function generarPDF() {
         let motivo = row.querySelector('input[name="motivo-auxiliar"]').value;
         let turno = row.querySelector('input[name="turno-auxiliar"]').value;
 
-        // Mostrar la información en líneas separadas
+        // Mostrar la información en líneas separadas, con la etiqueta arriba y el valor abajo
         if (nombre || apellido || motivo || turno) {
-            doc.text(`Nombre:`, x, y);
+            doc.text("Nombre:", x, y);
             y += 20;
             doc.text(`${nombre} ${apellido}`, x + 20, y);
             y += 20;
 
-            doc.text(`Motivo:`, x, y);
+            doc.text("Motivo:", x, y);
             y += 20;
-            doc.text(`${motivo}`, x + 20, y);
+            doc.text(motivo, x + 20, y);
             y += 20;
 
-            doc.text(`Turno:`, x, y);
+            doc.text("Turno:", x, y);
             y += 20;
-            doc.text(`${turno}`, x + 20, y);
-            y += 30; // Añadir espacio extra entre cada personal auxiliar
+            doc.text(turno, x + 20, y);
+            y += 40; // Añadir espacio extra entre cada personal auxiliar
         }
     });
 
     // Descargar el PDF con el nombre personalizado con la fecha
     doc.save(`parte-diario-${fecha}.pdf`);
 }
-
