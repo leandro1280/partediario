@@ -49,17 +49,49 @@ function generarPDF() {
     y += 20;
     doc.setFont('helvetica', 'normal');
 
-    document.querySelectorAll('.docente-row').forEach((row) => {
-        let docente = row.querySelector('input[name="docente"]').value;
-        let materia = row.querySelector('input[name="materia"]').value;
-        let grado = row.querySelector('select[name="grado"]').value;
-        let turno = row.querySelector('input[name="turno"]').value;
-        let modulos = row.querySelector('input[name="modulos"]').value;
-        let motivo = row.querySelector('input[name="motivo-docente"]').value;
-
-        doc.text(`Docente: ${docente} | Materia: ${materia} | Grado: ${grado} | Turno: ${turno} | Módulos: ${modulos} | Motivo: ${motivo}`, x, y);
-        y += 20;
+  document.addEventListener('DOMContentLoaded', function () {
+    // Función para agregar nuevos campos de docentes
+    document.getElementById('add-docente').addEventListener('click', function() {
+        let container = document.getElementById('docente-container');
+        let newDocenteRow = document.createElement('div');
+        newDocenteRow.classList.add('row', 'mb-3', 'docente-row');
+        newDocenteRow.innerHTML = `
+            <div class="col-md-2">
+                <label class="form-label">Docente</label>
+                <input type="text" class="form-control" name="docente" placeholder="Apellido y Nombre">
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Materia</label>
+                <input type="text" class="form-control" name="materia" placeholder="Materia">
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Grado</label>
+                <select class="form-select" name="grado" onchange="actualizarTurno(this)">
+                    <option value="" selected disabled>Seleccione el Grado</option>
+                    <option value="1ro 1ra">1ro 1ra</option>
+                    <option value="2do 1ra">2do 1ra</option>
+                    <!-- Agrega más opciones según sea necesario -->
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Turno</label>
+                <input type="text" class="form-control" name="turno" placeholder="Turno" readonly>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Módulos</label>
+                <input type="number" class="form-control" name="modulos" placeholder="Cantidad">
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Motivo</label>
+                <input type="text" class="form-control" name="motivo-docente" placeholder="Motivo">
+            </div>
+        `;
+        container.appendChild(newDocenteRow);
     });
+
+    // Función para generar PDF
+    document.getElementById('generar-pdf').addEventListener('click', generarPDF);
+});
 
     // Descargar el PDF con el nombre personalizado con la fecha
     doc.save(`parte-diario-${fecha}.pdf`);
