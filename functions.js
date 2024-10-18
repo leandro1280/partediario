@@ -40,18 +40,23 @@ function generarPDF() {
     doc.setFontSize(12);
     doc.setFont('helvetica', 'normal');
     doc.text("Establecimiento:", x, y);
-    y += 20;
-    doc.text(establecimiento, x + 20, y);
+    doc.text(establecimiento, x + 100, y);
     y += 20;
     doc.text("Fecha:", x, y);
-    y += 20;
-    doc.text(fecha, x + 20, y);
+    doc.text(fecha, x + 100, y);
     y += 30;
 
-    // Docentes
+    // Docentes - Cabecera
     doc.setFont('helvetica', 'bold');
-    doc.text("Novedades del Personal - Docentes", x, y);
+    doc.text("Docente", x, y);
+    doc.text("Materia", x + 120, y);
+    doc.text("Grado", x + 220, y);
+    doc.text("Turno", x + 320, y);
+    doc.text("Módulos", x + 420, y);
+    doc.text("Motivo", x + 520, y);
     y += 20;
+
+    // Docentes - Información
     doc.setFont('helvetica', 'normal');
 
     document.querySelectorAll('.docente-row').forEach((row) => {
@@ -62,102 +67,205 @@ function generarPDF() {
         let modulos = row.querySelector('input[name="modulos"]').value;
         let motivo = row.querySelector('input[name="motivo-docente"]').value;
 
-        // Mostrar la información en líneas separadas, con la etiqueta arriba y el valor abajo
         if (docente) {
-            doc.text("Docente:", x, y);
-            y += 20;
-            doc.text(docente, x + 20, y);
-            y += 20;
-
-            doc.text("Materia:", x, y);
-            y += 20;
-            doc.text(materia, x + 20, y);
-            y += 20;
-
-            doc.text("Grado:", x, y);
-            y += 20;
-            doc.text(grado, x + 20, y);
-            y += 20;
-
-            doc.text("Turno:", x, y);
-            y += 20;
-            doc.text(turno, x + 20, y);
-            y += 20;
-
-            doc.text("Módulos:", x, y);
-            y += 20;
-            doc.text(modulos, x + 20, y);
-            y += 20;
-
-            doc.text("Motivo:", x, y);
-            y += 20;
-            doc.text(motivo, x + 20, y);
-            y += 40; // Añadir espacio extra entre cada docente
+            // Imprimir la información de cada docente en una nueva línea
+            doc.text(docente, x, y);
+            doc.text(materia, x + 120, y);
+            doc.text(grado, x + 220, y);
+            doc.text(turno, x + 320, y);
+            doc.text(modulos, x + 420, y);
+            doc.text(motivo, x + 520, y);
+            y += 20; // Añadir espacio entre cada docente
         }
     });
 
-    // Personal de Cargo
-    doc.setFont('helvetica', 'bold');
-    doc.text("Personal de Cargo", x, y);
-    y += 20;
-    doc.setFont('helvetica', 'normal');
+    y += 30; // Espacio extra antes de la siguiente sección
 
-    document.querySelectorAll('.cargo-row').forEach((row) => {
-        let nombre = row.querySelector('input[name="nombre-cargo"]').value;
-        let apellido = row.querySelector('input[name="apellido-cargo"]').value;
-        let funcion = row.querySelector('input[name="funcion-cargo"]').value;
-        let turno = row.querySelector('input[name="turno-cargo"]').value;
-
-        // Mostrar la información en líneas separadas, con la etiqueta arriba y el valor abajo
-        if (nombre || apellido || funcion || turno) {
-            doc.text("Nombre:", x, y);
-            y += 20;
-            doc.text(`${nombre} ${apellido}`, x + 20, y);
-            y += 20;
-
-            doc.text("Función:", x, y);
-            y += 20;
-            doc.text(funcion, x + 20, y);
-            y += 20;
-
-            doc.text("Turno:", x, y);
-            y += 20;
-            doc.text(turno, x + 20, y);
-            y += 40; // Añadir espacio extra entre cada personal de cargo
-        }
-    });
-
-    // Personal Auxiliar
-    doc.setFont('helvetica', 'bold');
-    doc.text("Personal Auxiliar", x, y);
-    y += 20;
-    doc.setFont('helvetica', 'normal');
-
-    document.querySelectorAll('.auxiliar-row').forEach((row) => {
-        let nombre = row.querySelector('input[name="nombre-auxiliar"]').value;
-        let apellido = row.querySelector('input[name="apellido-auxiliar"]').value;
-        let motivo = row.querySelector('input[name="motivo-auxiliar"]').value;
-        let turno = row.querySelector('input[name="turno-auxiliar"]').value;
-
-        // Mostrar la información en líneas separadas, con la etiqueta arriba y el valor abajo
-        if (nombre || apellido || motivo || turno) {
-            doc.text("Nombre:", x, y);
-            y += 20;
-            doc.text(`${nombre} ${apellido}`, x + 20, y);
-            y += 20;
-
-            doc.text("Motivo:", x, y);
-            y += 20;
-            doc.text(motivo, x + 20, y);
-            y += 20;
-
-            doc.text("Turno:", x, y);
-            y += 20;
-            doc.text(turno, x + 20, y);
-            y += 40; // Añadir espacio extra entre cada personal auxiliar
-        }
-    });
-
-    // Descargar el PDF con el nombre personalizado con la fecha
-    doc.save(`parte-diario-${fecha}.pdf`);
+    // Aquí es donde comienza la segunda parte
 }
+// Personal de Cargo - Cabecera
+doc.setFont('helvetica', 'bold');
+doc.text("Nombre", x, y);
+doc.text("Apellido", x + 120, y);
+doc.text("Función", x + 220, y);
+doc.text("Turno", x + 320, y);
+y += 20;
+
+// Personal de Cargo - Información
+doc.setFont('helvetica', 'normal');
+
+document.querySelectorAll('.cargo-row').forEach((row) => {
+    let nombre = row.querySelector('input[name="nombre-cargo"]').value;
+    let apellido = row.querySelector('input[name="apellido-cargo"]').value;
+    let funcion = row.querySelector('input[name="funcion-cargo"]').value;
+    let turno = row.querySelector('input[name="turno-cargo"]').value;
+
+    if (nombre || apellido || funcion || turno) {
+        // Imprimir la información de cada persona de cargo en una nueva línea
+        doc.text(nombre, x, y);
+        doc.text(apellido, x + 120, y);
+        doc.text(funcion, x + 220, y);
+        doc.text(turno, x + 320, y);
+        y += 20; // Añadir espacio entre cada persona de cargo
+    }
+});
+
+y += 30; // Espacio extra antes de la siguiente sección
+
+// Personal Auxiliar - Cabecera
+doc.setFont('helvetica', 'bold');
+doc.text("Nombre", x, y);
+doc.text("Apellido", x + 120, y);
+doc.text("Motivo", x + 220, y);
+doc.text("Turno", x + 320, y);
+y += 20;
+
+// Personal Auxiliar - Información
+doc.setFont('helvetica', 'normal');
+
+document.querySelectorAll('.auxiliar-row').forEach((row) => {
+    let nombre = row.querySelector('input[name="nombre-auxiliar"]').value;
+    let apellido = row.querySelector('input[name="apellido-auxiliar"]').value;
+    let motivo = row.querySelector('input[name="motivo-auxiliar"]').value;
+    let turno = row.querySelector('input[name="turno-auxiliar"]').value;
+
+    if (nombre || apellido || motivo || turno) {
+        // Imprimir la información de cada auxiliar en una nueva línea
+        doc.text(nombre, x, y);
+        doc.text(apellido, x + 120, y);
+        doc.text(motivo, x + 220, y);
+        doc.text(turno, x + 320, y);
+        y += 20; // Añadir espacio entre cada auxiliar
+    }
+});
+
+y += 30; // Espacio extra antes de finalizar
+// Función para autocompletar el turno basado en el grado seleccionado
+function actualizarTurno(select) {
+    const grado = select.value.toLowerCase();
+    let turno = '';
+
+    // Definir el turno en base al grado seleccionado
+    if (["1ro 1ra", "2do 1ra", "3ro primera", "4to 1ra", "5to 1ra", "6to 2da"].includes(grado)) {
+        turno = 'Mañana';
+    } else if (["1ro 2da", "1ro 3ra", "2do 2da", "2do 3ra", "3ro 2da"].includes(grado)) {
+        turno = 'Tarde';
+    } else if (["4to 2da", "5to 1ra", "6to 1ra"].includes(grado)) {
+        turno = 'Vespertino';
+    }
+
+    // Actualizar el valor del campo de turno
+    select.closest('.docente-row').querySelector('input[name="turno"]').value = turno;
+}
+
+// Función para mostrar el día de la semana al seleccionar una fecha
+function mostrarDiaSemana() {
+    const fecha = new Date(document.getElementById('fecha').value);
+    const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    const diaSemana = diasSemana[fecha.getUTCDay()];
+    document.getElementById('dia-semana').value = diaSemana;
+}
+
+// Función para agregar nuevos campos de docentes, personal de cargo y personal auxiliar
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('add-docente').addEventListener('click', function() {
+        let container = document.getElementById('docente-container');
+        let newDocenteRow = document.createElement('div');
+        newDocenteRow.classList.add('row', 'mb-3', 'docente-row');
+        newDocenteRow.innerHTML = `
+            <div class="col-md-2">
+                <label for="docente" class="form-label">Docente</label>
+                <input type="text" class="form-control" name="docente" placeholder="Apellido y Nombre">
+            </div>
+            <div class="col-md-2">
+                <label for="materia" class="form-label">Materia</label>
+                <input type="text" class="form-control" name="materia" placeholder="Materia">
+            </div>
+            <div class="col-md-2">
+                <label for="grado" class="form-label">Grado</label>
+                <select class="form-select" name="grado" onchange="actualizarTurno(this)">
+                    <option value="" selected disabled>Seleccione el Grado</option>
+                    <option value="1ro 1ra">1ro 1ra</option>
+                    <option value="1ro 2da">1ro 2da</option>
+                    <option value="1ro 3ra">1ro 3ra</option>
+                    <option value="2do 1ra">2do 1ra</option>
+                    <option value="2do 2da">2do 2da</option>
+                    <option value="2do 3ra">2do 3ra</option>
+                    <option value="3ro primera">3ro primera</option>
+                    <option value="3ro 2da">3ro 2da</option>
+                    <option value="4to 1ra">4to 1ra</option>
+                    <option value="4to 2da">4to 2da</option>
+                    <option value="5to 1ra">5to 1ra</option>
+                    <option value="6to 1ra">6to 1ra</option>
+                    <option value="6to 2da">6to 2da</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="turno" class="form-label">Turno</label>
+                <input type="text" class="form-control" name="turno" placeholder="Turno" readonly>
+            </div>
+            <div class="col-md-2">
+                <label for="modulos" class="form-label">Módulos</label>
+                <input type="number" class="form-control" name="modulos" placeholder="Cantidad">
+            </div>
+            <div class="col-md-2">
+                <label for="motivo" class="form-label">Motivo</label>
+                <input type="text" class="form-control" name="motivo-docente" placeholder="Motivo">
+            </div>
+        `;
+        container.appendChild(newDocenteRow);
+    });
+
+    document.getElementById('add-cargo').addEventListener('click', function() {
+        let container = document.getElementById('cargo-container');
+        let newCargoRow = document.createElement('div');
+        newCargoRow.classList.add('row', 'mb-3', 'cargo-row');
+        newCargoRow.innerHTML = `
+            <div class="col-md-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="nombre-cargo" placeholder="Nombre">
+            </div>
+            <div class="col-md-3">
+                <label for="apellido" class="form-label">Apellido</label>
+                <input type="text" class="form-control" name="apellido-cargo" placeholder="Apellido">
+            </div>
+            <div class="col-md-3">
+                <label for="funcion" class="form-label">Función</label>
+                <input type="text" class="form-control" name="funcion-cargo" placeholder="Función">
+            </div>
+            <div class="col-md-3">
+                <label for="turno" class="form-label">Turno</label>
+                <input type="text" class="form-control" name="turno-cargo" placeholder="Turno">
+            </div>
+        `;
+        container.appendChild(newCargoRow);
+    });
+
+    document.getElementById('add-auxiliar').addEventListener('click', function() {
+        let container = document.getElementById('auxiliar-container');
+        let newAuxiliarRow = document.createElement('div');
+        newAuxiliarRow.classList.add('row', 'mb-3', 'auxiliar-row');
+        newAuxiliarRow.innerHTML = `
+            <div class="col-md-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="nombre-auxiliar" placeholder="Nombre">
+            </div>
+            <div class="col-md-3">
+                <label for="apellido" class="form-label">Apellido</label>
+                <input type="text" class="form-control" name="apellido-auxiliar" placeholder="Apellido">
+            </div>
+            <div class="col-md-3">
+                <label for="motivo" class="form-label">Motivo</label>
+                <input type="text" class="form-control" name="motivo-auxiliar" placeholder="Motivo">
+            </div>
+            <div class="col-md-3">
+                <label for="turno" class="form-label">Turno</label>
+                <input type="text" class="form-control" name="turno-auxiliar" placeholder="Turno">
+            </div>
+        `;
+        container.appendChild(newAuxiliarRow);
+    });
+
+    // Llamar a la función para mostrar el día de la semana al seleccionar la fecha
+    document.getElementById('fecha').addEventListener('change', mostrarDiaSemana);
+});
