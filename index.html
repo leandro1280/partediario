@@ -14,15 +14,15 @@
             <!-- Establecimiento y Fecha -->
             <div class="row mb-3">
                 <div class="col-md-4">
-                    <label for="establecimiento" class="form-label">Establecimiento</label>
+                    <div class="mb-2"><strong>Establecimiento</strong></div>
                     <input type="text" class="form-control" id="establecimiento" value="Escuela Número 54" readonly>
                 </div>
                 <div class="col-md-4">
-                    <label for="fecha" class="form-label">Fecha</label>
+                    <div class="mb-2"><strong>Fecha</strong></div>
                     <input type="date" class="form-control" id="fecha" onchange="mostrarDiaSemana()">
                 </div>
                 <div class="col-md-4">
-                    <label for="dia-semana" class="form-label">Día de la Semana</label>
+                    <div class="mb-2"><strong>Día de la Semana</strong></div>
                     <input type="text" class="form-control" id="dia-semana" readonly>
                 </div>
             </div>
@@ -32,15 +32,15 @@
             <div id="docente-container">
                 <div class="row mb-3 docente-row">
                     <div class="col-md-2">
-                        <label for="docente" class="form-label">Docente</label>
+                        <div class="mb-2"><strong>Docente</strong></div>
                         <input type="text" class="form-control" name="docente" placeholder="Apellido y Nombre">
                     </div>
                     <div class="col-md-2">
-                        <label for="materia" class="form-label">Materia</label>
+                        <div class="mb-2"><strong>Materia</strong></div>
                         <input type="text" class="form-control" name="materia" placeholder="Materia">
                     </div>
                     <div class="col-md-2">
-                        <label for="grado" class="form-label">Grado</label>
+                        <div class="mb-2"><strong>Grado</strong></div>
                         <select class="form-select" name="grado" onchange="actualizarTurno(this)">
                             <option value="" selected disabled>Seleccione el Grado</option>
                             <option value="1ro 1ra">1ro 1ra</option>
@@ -59,15 +59,15 @@
                         </select>
                     </div>
                     <div class="col-md-2">
-                        <label for="turno" class="form-label">Turno</label>
+                        <div class="mb-2"><strong>Turno</strong></div>
                         <input type="text" class="form-control" name="turno" placeholder="Turno" readonly>
                     </div>
                     <div class="col-md-2">
-                        <label for="modulos" class="form-label">Módulos</label>
+                        <div class="mb-2"><strong>Módulos</strong></div>
                         <input type="number" class="form-control" name="modulos" placeholder="Cantidad">
                     </div>
                     <div class="col-md-2">
-                        <label for="motivo" class="form-label">Motivo</label>
+                        <div class="mb-2"><strong>Motivo</strong></div>
                         <input type="text" class="form-control" name="motivo-docente" placeholder="Motivo">
                     </div>
                 </div>
@@ -79,19 +79,19 @@
             <div id="cargo-container">
                 <div class="row mb-3 cargo-row">
                     <div class="col-md-3">
-                        <label for="nombre" class="form-label">Nombre</label>
+                        <div class="mb-2"><strong>Nombre</strong></div>
                         <input type="text" class="form-control" name="nombre-cargo" placeholder="Nombre">
                     </div>
                     <div class="col-md-3">
-                        <label for="apellido" class="form-label">Apellido</label>
+                        <div class="mb-2"><strong>Apellido</strong></div>
                         <input type="text" class="form-control" name="apellido-cargo" placeholder="Apellido">
                     </div>
                     <div class="col-md-3">
-                        <label for="funcion" class="form-label">Función</label>
+                        <div class="mb-2"><strong>Función</strong></div>
                         <input type="text" class="form-control" name="funcion-cargo" placeholder="Función">
                     </div>
                     <div class="col-md-3">
-                        <label for="turno" class="form-label">Turno</label>
+                        <div class="mb-2"><strong>Turno</strong></div>
                         <input type="text" class="form-control" name="turno-cargo" placeholder="Turno">
                     </div>
                 </div>
@@ -103,19 +103,19 @@
             <div id="auxiliar-container">
                 <div class="row mb-3 auxiliar-row">
                     <div class="col-md-3">
-                        <label for="nombre" class="form-label">Nombre</label>
+                        <div class="mb-2"><strong>Nombre</strong></div>
                         <input type="text" class="form-control" name="nombre-auxiliar" placeholder="Nombre">
                     </div>
                     <div class="col-md-3">
-                        <label for="apellido" class="form-label">Apellido</label>
+                        <div class="mb-2"><strong>Apellido</strong></div>
                         <input type="text" class="form-control" name="apellido-auxiliar" placeholder="Apellido">
                     </div>
                     <div class="col-md-3">
-                        <label for="motivo" class="form-label">Motivo</label>
+                        <div class="mb-2"><strong>Motivo</strong></div>
                         <input type="text" class="form-control" name="motivo-auxiliar" placeholder="Motivo">
                     </div>
                     <div class="col-md-3">
-                        <label for="turno" class="form-label">Turno</label>
+                        <div class="mb-2"><strong>Turno</strong></div>
                         <input type="text" class="form-control" name="turno-auxiliar" placeholder="Turno">
                     </div>
                 </div>
@@ -124,7 +124,7 @@
 
             <!-- Contraseña para generar PDF -->
             <div class="mb-3">
-                <label for="password" class="form-label">Contraseña para Generar PDF:</label>
+                <label for="password" class="form-label"><strong>Contraseña para Generar PDF:</strong></label>
                 <input type="password" class="form-control" id="password" placeholder="Ingrese la contraseña">
             </div>
 
