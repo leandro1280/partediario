@@ -22,7 +22,7 @@ function generarPDF() {
     let y = 40;
 
     // Título principal
-    doc.setFontSize(18);
+    doc.setFontSize(14);
     doc.setFont('helvetica', 'bold');
     doc.text("PARTE DIARIO GENERAL Nº", x, y);
     y += 40;
