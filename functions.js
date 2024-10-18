@@ -1,12 +1,14 @@
 // Función para generar y descargar el PDF
 function generarPDF() {
+    // Verificar si la librería jsPDF está cargada
     const { jsPDF } = window.jspdf || {};
     if (!jsPDF) {
         alert("No se pudo cargar la librería jsPDF.");
         return;
     }
 
-    var doc = new jsPDF('portrait', 'pt', 'a4');
+    // Crear un nuevo documento PDF
+    var doc = new jsPDF('portrait', 'pt', 'a4');  // Define la variable doc aquí
 
     // Obtener los datos del formulario
     var dia = document.getElementById('dia').value;
@@ -116,4 +118,3 @@ document.addEventListener('DOMContentLoaded', function () {
     // Evento del botón para generar PDF
     document.querySelector('button[onclick="generarPDF()"]').addEventListener('click', generarPDF);
 });
-
