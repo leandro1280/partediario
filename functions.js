@@ -39,8 +39,8 @@ function generarPDF() {
     // Información del Establecimiento y Fecha
     doc.setFontSize(12);
     doc.setFont('helvetica', 'normal');
-    doc.text(Establecimiento: ${establecimiento}, x, y);
-    doc.text(Fecha: ${fecha}, x + 250, y);
+    doc.text(`Establecimiento: ${establecimiento}`, x, y);
+    doc.text(`Fecha: ${fecha}`, x + 250, y);
     y += 30;
 
     // Docentes
@@ -57,12 +57,16 @@ function generarPDF() {
         let modulos = row.querySelector('input[name="modulos"]').value;
         let motivo = row.querySelector('input[name="motivo-docente"]').value;
 
-        doc.text(Docente: ${docente} | Materia: ${materia} | Grado: ${grado} | Turno: ${turno} | Módulos: ${modulos} | Motivo: ${motivo}, x, y);
-        y += 20;
+        if (docente && materia && grado && turno && modulos && motivo) {
+            doc.text(`Docente: ${docente} | Materia: ${materia} | Grado: ${grado} | Turno: ${turno} | Módulos: ${modulos} | Motivo: ${motivo}`, x, y);
+            y += 20;
+        }
     });
 
+    y += 20;
+
     // Descargar el PDF con el nombre personalizado con la fecha
-    doc.save(parte-diario-${fecha}.pdf);
+    doc.save(`parte-diario-${fecha}.pdf`);
 }
 
 // Función para autocompletar el turno basado en el grado seleccionado
@@ -97,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let container = document.getElementById('docente-container');
         let newDocenteRow = document.createElement('div');
         newDocenteRow.classList.add('row', 'mb-3', 'docente-row');
-        newDocenteRow.innerHTML = 
+        newDocenteRow.innerHTML = `
             <div class="col-md-2">
                 <label for="docente" class="form-label">Docente</label>
                 <input type="text" class="form-control" name="docente" placeholder="Apellido y Nombre">
@@ -137,62 +141,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 <label for="motivo" class="form-label">Motivo</label>
                 <input type="text" class="form-control" name="motivo-docente" placeholder="Motivo">
             </div>
-        ;
+        `;
         container.appendChild(newDocenteRow);
     });
 
-    document.getElementById('add-cargo').addEventListener('click', function() {
-        let container = document.getElementById('cargo-container');
-        let newCargoRow = document.createElement('div');
-        newCargoRow.classList.add('row', 'mb-3', 'cargo-row');
-        newCargoRow.innerHTML = 
-            <div class="col-md-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="nombre-cargo" placeholder="Nombre">
-            </div>
-            <div class="col-md-3">
-                <label for="apellido" class="form-label">Apellido</label>
-                <input type="text" class="form-control" name="apellido-cargo" placeholder="Apellido">
-            </div>
-            <div class="col-md-3">
-                <label for="funcion" class="form-label">Función</label>
-                <input type="text" class="form-control" name="funcion-cargo" placeholder="Función">
-            </div>
-            <div class="col-md-3">
-                <label for="turno" class="form-label">Turno</label>
-                <input type="text" class="form-control" name="turno-cargo" placeholder="Turno">
-            </div>
-        ;
-        container.appendChild(newCargoRow);
-    });
-
-    document.getElementById('add-auxiliar').addEventListener('click', function() {
-        let container = document.getElementById('auxiliar-container');
-        let newAuxiliarRow = document.createElement('div');
-        newAuxiliarRow.classList.add('row', 'mb-3', 'auxiliar-row');
-        newAuxiliarRow.innerHTML = 
-            <div class="col-md-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="nombre-auxiliar" placeholder="Nombre">
-            </div>
-            <div class="col-md-3">
-                <label for="apellido" class="form-label">Apellido</label>
-                <input type="text" class="form-control" name="apellido-auxiliar" placeholder="Apellido">
-            </div>
-            <div class="col-md-3">
-                <label for="motivo" class="form-label">Motivo</label>
-                <input type="text" class="form-control" name="motivo-auxiliar" placeholder="Motivo">
-            </div>
-            <div class="col-md-3">
-                <label for="turno" class="form-label">Turno</label>
-                <input type="text" class="form-control" name="turno-auxiliar" placeholder="Turno">
-            </div>
-        ;
-        container.appendChild(newAuxiliarRow);
-    });
-}); 
-    // Descargar el PDF con el nombre personalizado con la fecha
-    doc.save(`parte-diario-${fecha}.pdf`);
-}
-
+    // Agregar eventos similares para personal de cargo y auxiliar según sea necesario...
 });
