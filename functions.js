@@ -26,7 +26,7 @@ function actualizarTurno(selectElement) {
     }
 
     // Buscar el input de turno en la misma fila
-    const row = selectElement.closest('.row');
+    const row = selectElement.closest('.docente-row');
     const turnoInput = row.querySelector('input[name="turno"]');
     if (turnoInput) {
         turnoInput.value = turno;
@@ -197,19 +197,19 @@ document.addEventListener('DOMContentLoaded', function () {
     // Evento para agregar un nuevo docente
     document.getElementById('add-docente').addEventListener('click', function() {
         let container = document.getElementById('docente-container');
+
+        // Crear una nueva fila de inputs
         let newDocenteRow = document.createElement('div');
         newDocenteRow.classList.add('row', 'mb-3', 'docente-row');
+
         newDocenteRow.innerHTML = `
             <div class="col-md-2">
-                <div class="mb-2"><strong>Docente</strong></div>
                 <input type="text" class="form-control" name="docente" placeholder="Apellido y Nombre">
             </div>
             <div class="col-md-2">
-                <div class="mb-2"><strong>Materia</strong></div>
                 <input type="text" class="form-control" name="materia" placeholder="Materia">
             </div>
             <div class="col-md-2">
-                <div class="mb-2"><strong>Grado</strong></div>
                 <select class="form-select" name="grado" onchange="actualizarTurno(this)">
                     <option value="" selected disabled>Seleccione el Grado</option>
                     <option value="1ro 1ra">1ro 1ra</option>
@@ -217,67 +217,62 @@ document.addEventListener('DOMContentLoaded', function () {
                 </select>
             </div>
             <div class="col-md-2">
-                <div class="mb-2"><strong>Turno</strong></div>
                 <input type="text" class="form-control" name="turno" placeholder="Turno" readonly>
             </div>
             <div class="col-md-2">
-                <div class="mb-2"><strong>Módulos</strong></div>
                 <input type="number" class="form-control" name="modulos" placeholder="Cantidad">
             </div>
             <div class="col-md-2">
-                <div class="mb-2"><strong>Motivo</strong></div>
                 <input type="text" class="form-control" name="motivo-docente" placeholder="Motivo">
             </div>
         `;
         container.appendChild(newDocenteRow);
     });
 
-    // Evento para agregar nuevo personal de cargo
+    // Eventos similares para 'add-cargo' y 'add-auxiliar'
+    // ...
+
+    // Agregar eventos para los otros botones de agregar
     document.getElementById('add-cargo').addEventListener('click', function() {
         let container = document.getElementById('cargo-container');
+
         let newCargoRow = document.createElement('div');
         newCargoRow.classList.add('row', 'mb-3', 'cargo-row');
+
         newCargoRow.innerHTML = `
             <div class="col-md-3">
-                <div class="mb-2"><strong>Nombre</strong></div>
                 <input type="text" class="form-control" name="nombre-cargo" placeholder="Nombre">
             </div>
             <div class="col-md-3">
-                <div class="mb-2"><strong>Apellido</strong></div>
                 <input type="text" class="form-control" name="apellido-cargo" placeholder="Apellido">
             </div>
             <div class="col-md-3">
-                <div class="mb-2"><strong>Función</strong></div>
                 <input type="text" class="form-control" name="funcion-cargo" placeholder="Función">
             </div>
             <div class="col-md-3">
-                <div class="mb-2"><strong>Turno</strong></div>
                 <input type="text" class="form-control" name="turno-cargo" placeholder="Turno">
             </div>
         `;
         container.appendChild(newCargoRow);
     });
 
-    // Evento para agregar nuevo personal auxiliar
     document.getElementById('add-auxiliar').addEventListener('click', function() {
         let container = document.getElementById('auxiliar-container');
+
         let newAuxiliarRow = document.createElement('div');
         newAuxiliarRow.classList.add('row', 'mb-3', 'auxiliar-row');
+
         newAuxiliarRow.innerHTML = `
             <div class="col-md-3">
-                <div class="mb-2"><strong>Nombre</strong></div>
                 <input type="text" class="form-control" name="nombre-auxiliar" placeholder="Nombre">
             </div>
             <div class="col-md-3">
-                <div class="mb-2"><strong>Apellido</strong></div>
                 <input type="text" class="form-control" name="apellido-auxiliar" placeholder="Apellido">
             </div>
             <div class="col-md-3">
-                <div class="mb-2"><strong>Motivo</strong></div>
                 <input type="text" class="form-control" name="motivo-auxiliar" placeholder="Motivo">
             </div>
             <div class="col-md-3">
-                <div class="mb-2"><strong>Turno</strong></div>
                 <input type="text" class="form-control" name="turno-auxiliar" placeholder="Turno">
             </div>
         `;
