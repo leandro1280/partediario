@@ -16,15 +16,15 @@
             <!-- Establecimiento y Fecha -->
             <div class="row mb-3">
                 <div class="col-md-4">
-                    <div class="mb-2"><strong>Establecimiento</strong></div>
+                    <label for="establecimiento" class="form-label"><strong>Establecimiento</strong></label>
                     <input type="text" class="form-control" id="establecimiento" value="Escuela Número 54" readonly>
                 </div>
                 <div class="col-md-4">
-                    <div class="mb-2"><strong>Fecha</strong></div>
+                    <label for="fecha" class="form-label"><strong>Fecha</strong></label>
                     <input type="date" class="form-control" id="fecha" onchange="mostrarDiaSemana()">
                 </div>
                 <div class="col-md-4">
-                    <div class="mb-2"><strong>Día de la Semana</strong></div>
+                    <label for="dia-semana" class="form-label"><strong>Día de la Semana</strong></label>
                     <input type="text" class="form-control" id="dia-semana" readonly>
                 </div>
             </div>
@@ -32,17 +32,36 @@
             <!-- Novedades del Personal - Docentes -->
             <h5 class="mt-4">Novedades del Personal - Docentes</h5>
             <div id="docente-container">
+                <!-- Primera fila: Labels -->
+                <div class="row">
+                    <div class="col-md-2">
+                        <label class="form-label"><strong>Docente</strong></label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label"><strong>Materia</strong></label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label"><strong>Grado</strong></label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label"><strong>Turno</strong></label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label"><strong>Módulos</strong></label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label"><strong>Motivo</strong></label>
+                    </div>
+                </div>
+                <!-- Segunda fila: Inputs -->
                 <div class="row mb-3 docente-row">
                     <div class="col-md-2">
-                        <div class="mb-2"><strong>Docente</strong></div>
                         <input type="text" class="form-control" name="docente" placeholder="Apellido y Nombre">
                     </div>
                     <div class="col-md-2">
-                        <div class="mb-2"><strong>Materia</strong></div>
                         <input type="text" class="form-control" name="materia" placeholder="Materia">
                     </div>
                     <div class="col-md-2">
-                        <div class="mb-2"><strong>Grado</strong></div>
                         <select class="form-select" name="grado" onchange="actualizarTurno(this)">
                             <option value="" selected disabled>Seleccione el Grado</option>
                             <option value="1ro 1ra">1ro 1ra</option>
@@ -61,15 +80,12 @@
                         </select>
                     </div>
                     <div class="col-md-2">
-                        <div class="mb-2"><strong>Turno</strong></div>
                         <input type="text" class="form-control" name="turno" placeholder="Turno" readonly>
                     </div>
                     <div class="col-md-2">
-                        <div class="mb-2"><strong>Módulos</strong></div>
                         <input type="number" class="form-control" name="modulos" placeholder="Cantidad">
                     </div>
                     <div class="col-md-2">
-                        <div class="mb-2"><strong>Motivo</strong></div>
                         <input type="text" class="form-control" name="motivo-docente" placeholder="Motivo">
                     </div>
                 </div>
@@ -79,21 +95,33 @@
             <!-- Personal de Cargo -->
             <h5 class="mt-4">Personal de Cargo</h5>
             <div id="cargo-container">
+                <!-- Primera fila: Labels -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="form-label"><strong>Nombre</strong></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label"><strong>Apellido</strong></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label"><strong>Función</strong></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label"><strong>Turno</strong></label>
+                    </div>
+                </div>
+                <!-- Segunda fila: Inputs -->
                 <div class="row mb-3 cargo-row">
                     <div class="col-md-3">
-                        <div class="mb-2"><strong>Nombre</strong></div>
                         <input type="text" class="form-control" name="nombre-cargo" placeholder="Nombre">
                     </div>
                     <div class="col-md-3">
-                        <div class="mb-2"><strong>Apellido</strong></div>
                         <input type="text" class="form-control" name="apellido-cargo" placeholder="Apellido">
                     </div>
                     <div class="col-md-3">
-                        <div class="mb-2"><strong>Función</strong></div>
                         <input type="text" class="form-control" name="funcion-cargo" placeholder="Función">
                     </div>
                     <div class="col-md-3">
-                        <div class="mb-2"><strong>Turno</strong></div>
                         <input type="text" class="form-control" name="turno-cargo" placeholder="Turno">
                     </div>
                 </div>
@@ -103,21 +131,33 @@
             <!-- Personal Auxiliar -->
             <h5 class="mt-4">Personal Auxiliar</h5>
             <div id="auxiliar-container">
+                <!-- Primera fila: Labels -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="form-label"><strong>Nombre</strong></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label"><strong>Apellido</strong></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label"><strong>Motivo</strong></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label"><strong>Turno</strong></label>
+                    </div>
+                </div>
+                <!-- Segunda fila: Inputs -->
                 <div class="row mb-3 auxiliar-row">
                     <div class="col-md-3">
-                        <div class="mb-2"><strong>Nombre</strong></div>
                         <input type="text" class="form-control" name="nombre-auxiliar" placeholder="Nombre">
                     </div>
                     <div class="col-md-3">
-                        <div class="mb-2"><strong>Apellido</strong></div>
                         <input type="text" class="form-control" name="apellido-auxiliar" placeholder="Apellido">
                     </div>
                     <div class="col-md-3">
-                        <div class="mb-2"><strong>Motivo</strong></div>
                         <input type="text" class="form-control" name="motivo-auxiliar" placeholder="Motivo">
                     </div>
                     <div class="col-md-3">
-                        <div class="mb-2"><strong>Turno</strong></div>
                         <input type="text" class="form-control" name="turno-auxiliar" placeholder="Turno">
                     </div>
                 </div>
