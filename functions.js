@@ -4,7 +4,7 @@
 function mostrarDiaSemana() {
     const fechaInput = document.getElementById('fecha').value;
     if (fechaInput) {
-        const fecha = new Date(fechaInput);
+        const fecha = new Date(fechaInput + 'T00:00:00'); // Agregar hora para evitar desfase de zona horaria
         const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
         const diaSemana = diasSemana[fecha.getDay()];
         document.getElementById('dia-semana').value = diaSemana;
