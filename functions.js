@@ -104,6 +104,8 @@ function generarPDF() {
 }
 
 // Función para agregar nuevos campos de docentes, personal de cargo y personal auxiliar
+
+// Función para agregar nuevos campos de docentes, personal de cargo y personal auxiliar
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('add-docente').addEventListener('click', function() {
         let container = document.getElementById('docente-container');
@@ -119,25 +121,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 <input type="text" class="form-control" name="materia" placeholder="Materia">
             </div>
             <div class="col-md-2">
-                <label for="turno" class="form-label">Turno</label>
-                <input type="text" class="form-control" name="turno" placeholder="Turno">
+                <label for="grado" class="form-label">Grado</label>
+                <input type="text" class="form-control" name="grado" placeholder="Grado" onchange="actualizarTurno(this)">
             </div>
             <div class="col-md-2">
-                <label for="grado" class="form-label">Grado</label>
-                <input type="text" class="form-control" name="grado" placeholder="Grado">
+                <label for="turno" class="form-label">Turno</label>
+                <input type="text" class="form-control" name="turno" placeholder="Turno">
             </div>
             <div class="col-md-2">
                 <label for="modulos" class="form-label">Módulos</label>
                 <input type="text" class="form-control" name="modulos" placeholder="Módulos">
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <label for="motivo-docente" class="form-label">Motivo</label>
                 <input type="text" class="form-control" name="motivo-docente" placeholder="Motivo">
             </div>
         `;
         container.appendChild(newDocenteRow);
     });
-
     document.getElementById('add-cargo').addEventListener('click', function() {
         let container = document.getElementById('cargo-container');
         let newCargoRow = document.createElement('div');
@@ -188,17 +189,17 @@ document.addEventListener('DOMContentLoaded', function () {
         container.appendChild(newAuxiliarRow);
     });
 
-    // Función para autocompletar el turno basado en el grado
-    function actualizarTurno(input) {
-        const grado = input.value.toLowerCase();
-        let turno = '';
-        if (["1ro 1ra", "2do 1ra", "3ro primera", "4to 1ra", "5to", "6to 2da"].includes(grado)) {
-            turno = 'Mañana';
-        } else if (["1ro 2da", "1ro 3ra", "2do 2da", "2do 3ra", "3ro 2da"].includes(grado)) {
-            turno = 'Tarde';
-        } else if (["4to 2da", "5to 1ra", "6to 1ra"].includes(grado)) {
-            turno = 'Vespertino';
-        }
-        input.closest('.docente-row').querySelector('input[name="turno"]').value = turno;
+// Función para autocompletar el turno basado en el grado
+function actualizarTurno(input) {
+    const grado = input.value.toLowerCase();
+    let turno = '';
+    if (["1ro 1ra", "2do 1ra", "3ro primera", "4to 1ra", "5to", "6to 2da"].includes(grado)) {
+        turno = 'Mañana';
+    } else if (["1ro 2da", "1ro 3ra", "2do 2da", "2do 3ra", "3ro 2da"].includes(grado)) {
+        turno = 'Tarde';
+    } else if (["4to 2da", "5to 1ra", "6to 1ra"].includes(grado)) {
+        turno = 'Vespertino';
     }
+    input.closest('.docente-row').querySelector('input[name="turno"]').value = turno;
+}
 });
