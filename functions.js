@@ -33,10 +33,6 @@ function actualizarTurno(selectElement) {
     }
 }
 
-/// functions.js
-
-// ... (resto del código permanece igual)
-
 // Función para generar y descargar el PDF
 function generarPDF() {
     // Verificar si la contraseña es correcta
@@ -45,6 +41,7 @@ function generarPDF() {
         alert("Contraseña incorrecta. No se puede generar el PDF.");
         return;
     }
+
     // Verificar si la librería jsPDF está cargada
     const { jsPDF } = window.jspdf || {};
     if (!jsPDF) {
@@ -52,11 +49,14 @@ function generarPDF() {
         alert("Error: La librería jsPDF no está cargada.");
         return;
     }
+
     // Crear un nuevo documento PDF
     const doc = new jsPDF();
+
     // Posiciones iniciales para el contenido del PDF
     let x = 20;
     let y = 30;
+
     // Título
     doc.setFontSize(20);
     doc.setFont('helvetica', 'bold');
@@ -64,14 +64,13 @@ function generarPDF() {
     y += 20;
 
     // Obtener los datos del formulario
-    var fecha = document.getElementById('fecha').value;
+    const fecha = document.getElementById('fecha').value;
     if (!fecha) {
         alert("Por favor, ingrese la fecha antes de generar el PDF.");
         return;
     }
-    var diaSemana = document.getElementById('dia-semana').value;
-
-    let establecimiento = document.getElementById('establecimiento').value;
+    const diaSemana = document.getElementById('dia-semana').value;
+    const establecimiento = document.getElementById('establecimiento').value;
 
     // Información del Establecimiento y Fecha
     doc.setFontSize(12);
@@ -86,30 +85,39 @@ function generarPDF() {
     doc.text("Novedades del Personal - Docentes", x, y);
     y += 10;
     doc.setFont('helvetica', 'normal');
-    document.querySelectorAll('.docente-row').forEach((row) => {
-        let docente = row.querySelector('input[name="docente"]').value;
-        let materia = row.querySelector('input[name="materia"]').value;
-        let grado = row.querySelector('select[name="grado"]').value;
-        let turno = row.querySelector('input[name="turno"]').value;
-        let modulos = row.querySelector('input[name="modulos"]').value;
-        let motivo = row.querySelector('input[name="motivo-docente"]').value;
 
-        // Primera línea: etiquetas y datos principales
-        let linea1 = `Docente: ${docente} | Materia: ${materia}`;
-        doc.text(linea1, x, y);
+    // Verificar si hay datos de docentes
+    const docentes = document.querySelectorAll('.docente-row');
+    if (docentes.length === 0) {
+        doc.text("No hay datos de docentes.", x, y);
         y += 10;
+    } else {
+        docentes.forEach((row) => {
+            const docente = row.querySelector('input[name="docente"]').value || '';
+            const materia = row.querySelector('input[name="materia"]').value || '';
+            const grado = row.querySelector('select[name="grado"]').value || '';
+            const turno = row.querySelector('input[name="turno"]').value || '';
+            const modulos = row.querySelector('input[name="modulos"]').value || '';
+            const motivo = row.querySelector('input[name="motivo-docente"]').value || '';
 
-        // Segunda línea: datos adicionales
-        let linea2 = `Grado: ${grado} | Turno: ${turno} | Módulos: ${modulos} | Motivo: ${motivo}`;
-        doc.text(linea2, x, y);
-        y += 15; // Aumentar el espacio para separar entre docentes
+            // Primera línea: etiquetas y datos principales
+            const linea1 = `Docente: ${docente} | Materia: ${materia}`;
+            doc.text(linea1, x, y);
+            y += 10;
 
-        // Verificar si hay que agregar una nueva página
-        if (y > 270) {
-            doc.addPage();
-            y = 20;
-        }
-    });
+            // Segunda línea: datos adicionales
+            const linea2 = `Grado: ${grado} | Turno: ${turno} | Módulos: ${modulos} | Motivo: ${motivo}`;
+            doc.text(linea2, x, y);
+            y += 15; // Aumentar el espacio para separar entre docentes
+
+            // Verificar si hay que agregar una nueva página
+            if (y > 270) {
+                doc.addPage();
+                y = 20;
+            }
+        });
+    }
+
     y += 10;
 
     // Personal de Cargo
@@ -117,27 +125,35 @@ function generarPDF() {
     doc.text("Personal de Cargo", x, y);
     y += 10;
     doc.setFont('helvetica', 'normal');
-    document.querySelectorAll('.cargo-row').forEach((row) => {
-        let nombre = row.querySelector('input[name="nombre-cargo"]').value;
-        let apellido = row.querySelector('input[name="apellido-cargo"]').value;
-        let funcion = row.querySelector('input[name="funcion-cargo"]').value;
-        let turno = row.querySelector('input[name="turno-cargo"]').value;
 
-        // Primera línea: etiquetas y datos principales
-        let linea1 = `Nombre: ${nombre} ${apellido}`;
-        doc.text(linea1, x, y);
+    const cargos = document.querySelectorAll('.cargo-row');
+    if (cargos.length === 0) {
+        doc.text("No hay datos de personal de cargo.", x, y);
         y += 10;
+    } else {
+        cargos.forEach((row) => {
+            const nombre = row.querySelector('input[name="nombre-cargo"]').value || '';
+            const apellido = row.querySelector('input[name="apellido-cargo"]').value || '';
+            const funcion = row.querySelector('input[name="funcion-cargo"]').value || '';
+            const turno = row.querySelector('input[name="turno-cargo"]').value || '';
 
-        // Segunda línea: datos adicionales
-        let linea2 = `Función: ${funcion} | Turno: ${turno}`;
-        doc.text(linea2, x, y);
-        y += 15;
+            // Primera línea: etiquetas y datos principales
+            const linea1 = `Nombre: ${nombre} ${apellido}`;
+            doc.text(linea1, x, y);
+            y += 10;
 
-        if (y > 270) {
-            doc.addPage();
-            y = 20;
-        }
-    });
+            // Segunda línea: datos adicionales
+            const linea2 = `Función: ${funcion} | Turno: ${turno}`;
+            doc.text(linea2, x, y);
+            y += 15;
+
+            if (y > 270) {
+                doc.addPage();
+                y = 20;
+            }
+        });
+    }
+
     y += 10;
 
     // Personal Auxiliar
@@ -145,34 +161,38 @@ function generarPDF() {
     doc.text("Personal Auxiliar", x, y);
     y += 10;
     doc.setFont('helvetica', 'normal');
-    document.querySelectorAll('.auxiliar-row').forEach((row) => {
-        let nombre = row.querySelector('input[name="nombre-auxiliar"]').value;
-        let apellido = row.querySelector('input[name="apellido-auxiliar"]').value;
-        let motivo = row.querySelector('input[name="motivo-auxiliar"]').value;
-        let turno = row.querySelector('input[name="turno-auxiliar"]').value;
 
-        // Primera línea: etiquetas y datos principales
-        let linea1 = `Nombre: ${nombre} ${apellido}`;
-        doc.text(linea1, x, y);
+    const auxiliares = document.querySelectorAll('.auxiliar-row');
+    if (auxiliares.length === 0) {
+        doc.text("No hay datos de personal auxiliar.", x, y);
         y += 10;
+    } else {
+        auxiliares.forEach((row) => {
+            const nombre = row.querySelector('input[name="nombre-auxiliar"]').value || '';
+            const apellido = row.querySelector('input[name="apellido-auxiliar"]').value || '';
+            const motivo = row.querySelector('input[name="motivo-auxiliar"]').value || '';
+            const turno = row.querySelector('input[name="turno-auxiliar"]').value || '';
 
-        // Segunda línea: datos adicionales
-        let linea2 = `Motivo: ${motivo} | Turno: ${turno}`;
-        doc.text(linea2, x, y);
-        y += 15;
+            // Primera línea: etiquetas y datos principales
+            const linea1 = `Nombre: ${nombre} ${apellido}`;
+            doc.text(linea1, x, y);
+            y += 10;
 
-        if (y > 270) {
-            doc.addPage();
-            y = 20;
-        }
-    });
+            // Segunda línea: datos adicionales
+            const linea2 = `Motivo: ${motivo} | Turno: ${turno}`;
+            doc.text(linea2, x, y);
+            y += 15;
+
+            if (y > 270) {
+                doc.addPage();
+                y = 20;
+            }
+        });
+    }
 
     // Descargar el PDF con el nombre personalizado con la fecha
     doc.save(`parte-diario-${fecha}.pdf`);
 }
-
-// ... (el resto del código permanece igual)
-
 
 // Función para actualizar la vista previa de los datos ingresados
 function actualizarVistaPrevia() {
@@ -188,7 +208,13 @@ function actualizarVistaPrevia() {
         const modulos = row.querySelector('input[name="modulos"]').value;
         const motivo = row.querySelector('input[name="motivo-docente"]').value;
 
-        contenido += `<p><strong>Docente ${index + 1}:</strong> ${docente}, Materia: ${materia}, Grado: ${grado}, Turno: ${turno}, Módulos: ${modulos}, Motivo: ${motivo}</p>`;
+        contenido += `<p><strong>Docente ${index + 1}:</strong><br>
+            Docente: ${docente}<br>
+            Materia: ${materia}<br>
+            Grado: ${grado}<br>
+            Turno: ${turno}<br>
+            Módulos: ${modulos}<br>
+            Motivo: ${motivo}</p>`;
     });
 
     // Personal de Cargo
@@ -198,7 +224,10 @@ function actualizarVistaPrevia() {
         const funcion = row.querySelector('input[name="funcion-cargo"]').value;
         const turno = row.querySelector('input[name="turno-cargo"]').value;
 
-        contenido += `<p><strong>Personal de Cargo ${index + 1}:</strong> ${nombre} ${apellido}, Función: ${funcion}, Turno: ${turno}</p>`;
+        contenido += `<p><strong>Personal de Cargo ${index + 1}:</strong><br>
+            Nombre: ${nombre} ${apellido}<br>
+            Función: ${funcion}<br>
+            Turno: ${turno}</p>`;
     });
 
     // Personal Auxiliar
@@ -208,7 +237,10 @@ function actualizarVistaPrevia() {
         const motivo = row.querySelector('input[name="motivo-auxiliar"]').value;
         const turno = row.querySelector('input[name="turno-auxiliar"]').value;
 
-        contenido += `<p><strong>Personal Auxiliar ${index + 1}:</strong> ${nombre} ${apellido}, Motivo: ${motivo}, Turno: ${turno}</p>`;
+        contenido += `<p><strong>Personal Auxiliar ${index + 1}:</strong><br>
+            Nombre: ${nombre} ${apellido}<br>
+            Motivo: ${motivo}<br>
+            Turno: ${turno}</p>`;
     });
 
     vistaPrevia.innerHTML = contenido;
@@ -238,7 +270,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 <select class="form-select" name="grado" onchange="actualizarTurno(this)">
                     <option value="" selected disabled>Seleccione el Grado</option>
                     <option value="1ro 1ra">1ro 1ra</option>
-                    <!-- ... otras opciones ... -->
+                    <option value="1ro 2da">1ro 2da</option>
+                    <option value="1ro 3ra">1ro 3ra</option>
+                    <option value="2do 1ra">2do 1ra</option>
+                    <option value="2do 2da">2do 2da</option>
+                    <option value="2do 3ra">2do 3ra</option>
+                    <option value="3ro primera">3ro primera</option>
+                    <option value="3ro 2da">3ro 2da</option>
+                    <option value="4to 1ra">4to 1ra</option>
+                    <option value="4to 2da">4to 2da</option>
+                    <option value="5to 1ra">5to 1ra</option>
+                    <option value="6to 1ra">6to 1ra</option>
+                    <option value="6to 2da">6to 2da</option>
                 </select>
             </div>
             <div class="col-md-2">
@@ -254,10 +297,7 @@ document.addEventListener('DOMContentLoaded', function () {
         container.appendChild(newDocenteRow);
     });
 
-    // Eventos similares para 'add-cargo' y 'add-auxiliar'
-    // ...
-
-    // Agregar eventos para los otros botones de agregar
+    // Evento para agregar nuevo personal de cargo
     document.getElementById('add-cargo').addEventListener('click', function() {
         let container = document.getElementById('cargo-container');
 
@@ -281,6 +321,7 @@ document.addEventListener('DOMContentLoaded', function () {
         container.appendChild(newCargoRow);
     });
 
+    // Evento para agregar nuevo personal auxiliar
     document.getElementById('add-auxiliar').addEventListener('click', function() {
         let container = document.getElementById('auxiliar-container');
 
