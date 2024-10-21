@@ -33,6 +33,10 @@ function actualizarTurno(selectElement) {
     }
 }
 
+/// functions.js
+
+// ... (resto del código permanece igual)
+
 // Función para generar y descargar el PDF
 function generarPDF() {
     // Verificar si la contraseña es correcta
@@ -90,9 +94,15 @@ function generarPDF() {
         let modulos = row.querySelector('input[name="modulos"]').value;
         let motivo = row.querySelector('input[name="motivo-docente"]').value;
 
-        let texto = `Docente: ${docente} | Materia: ${materia} | Grado: ${grado} | Turno: ${turno} | Módulos: ${modulos} | Motivo: ${motivo}`;
-        doc.text(texto, x, y);
+        // Primera línea: etiquetas y datos principales
+        let linea1 = `Docente: ${docente} | Materia: ${materia}`;
+        doc.text(linea1, x, y);
         y += 10;
+
+        // Segunda línea: datos adicionales
+        let linea2 = `Grado: ${grado} | Turno: ${turno} | Módulos: ${modulos} | Motivo: ${motivo}`;
+        doc.text(linea2, x, y);
+        y += 15; // Aumentar el espacio para separar entre docentes
 
         // Verificar si hay que agregar una nueva página
         if (y > 270) {
@@ -113,9 +123,15 @@ function generarPDF() {
         let funcion = row.querySelector('input[name="funcion-cargo"]').value;
         let turno = row.querySelector('input[name="turno-cargo"]').value;
 
-        let texto = `Nombre: ${nombre} ${apellido} | Función: ${funcion} | Turno: ${turno}`;
-        doc.text(texto, x, y);
+        // Primera línea: etiquetas y datos principales
+        let linea1 = `Nombre: ${nombre} ${apellido}`;
+        doc.text(linea1, x, y);
         y += 10;
+
+        // Segunda línea: datos adicionales
+        let linea2 = `Función: ${funcion} | Turno: ${turno}`;
+        doc.text(linea2, x, y);
+        y += 15;
 
         if (y > 270) {
             doc.addPage();
@@ -135,9 +151,15 @@ function generarPDF() {
         let motivo = row.querySelector('input[name="motivo-auxiliar"]').value;
         let turno = row.querySelector('input[name="turno-auxiliar"]').value;
 
-        let texto = `Nombre: ${nombre} ${apellido} | Motivo: ${motivo} | Turno: ${turno}`;
-        doc.text(texto, x, y);
+        // Primera línea: etiquetas y datos principales
+        let linea1 = `Nombre: ${nombre} ${apellido}`;
+        doc.text(linea1, x, y);
         y += 10;
+
+        // Segunda línea: datos adicionales
+        let linea2 = `Motivo: ${motivo} | Turno: ${turno}`;
+        doc.text(linea2, x, y);
+        y += 15;
 
         if (y > 270) {
             doc.addPage();
@@ -148,6 +170,9 @@ function generarPDF() {
     // Descargar el PDF con el nombre personalizado con la fecha
     doc.save(`parte-diario-${fecha}.pdf`);
 }
+
+// ... (el resto del código permanece igual)
+
 
 // Función para actualizar la vista previa de los datos ingresados
 function actualizarVistaPrevia() {
