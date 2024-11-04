@@ -12,35 +12,43 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo de la tabla */
-table {
-    width: 100%;
-    border-collapse: collapse;
+/* Título */
+h2 {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 30px;
 }
 
-th {
-    background-color: #343a40;
-    color: white;
-    padding: 10px;
-    text-align: center;
+/* Labels */
+label {
     font-weight: bold;
 }
 
-td {
-    padding: 8px;
-    text-align: center;
-    border: 1px solid #dee2e6;
-}
-
-td input {
+/* Botón */
+button {
+    display: block;
     width: 100%;
-    border: none;
-    text-align: center;
-    background-color: #f8f9fa;
-    border-radius: 4px;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 18px;
 }
 
-/* Filas alternas para mejorar la legibilidad */
-tbody tr:nth-child(odd) {
-    background-color: #f2f2f2;
+/* Textareas */
+textarea {
+    resize: none;
+}
+
+/* Responsive para móviles */
+@media (max-width: 576px) {
+    .container {
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    button {
+        font-size: 16px;
+    }
 }
