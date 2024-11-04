@@ -31,90 +31,137 @@
 
             <!-- Novedades del Personal - Docentes -->
             <h5 class="mt-4">Novedades del Personal - Docentes</h5>
-            <table class="table table-bordered">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Docente</th>
-                        <th>Materia</th>
-                        <th>Grado</th>
-                        <th>Turno</th>
-                        <th>Módulos</th>
-                        <th>Motivo</th>
-                    </tr>
-                </thead>
-                <tbody id="docente-container">
-                    <tr class="docente-row">
-                        <td><input type="text" class="form-control" name="docente" placeholder="Apellido y Nombre"></td>
-                        <td><input type="text" class="form-control" name="materia" placeholder="Materia"></td>
-                        <td>
-                            <select class="form-select" name="grado" onchange="actualizarTurno(this)">
-                                <option value="" selected disabled>Seleccione el Grado</option>
-                                <option value="1ro 1ra">1ro 1ra</option>
-                                <option value="1ro 2da">1ro 2da</option>
-                                <option value="1ro 3ra">1ro 3ra</option>
-                                <option value="2do 1ra">2do 1ra</option>
-                                <option value="2do 2da">2do 2da</option>
-                                <option value="2do 3ra">2do 3ra</option>
-                                <option value="3ro primera">3ro primera</option>
-                                <option value="3ro 2da">3ro 2da</option>
-                                <option value="4to 1ra">4to 1ra</option>
-                                <option value="4to 2da">4to 2da</option>
-                                <option value="5to 1ra">5to 1ra</option>
-                                <option value="5to 2da">5to 2da</option>
-                                <option value="6to 1ra">6to 1ra</option>
-                                <option value="6to 2da">6to 2da</option>
-                            </select>
-                        </td>
-                        <td><input type="text" class="form-control" name="turno" placeholder="Turno" readonly></td>
-                        <td><input type="number" class="form-control" name="modulos" placeholder="Cantidad"></td>
-                        <td><input type="text" class="form-control" name="motivo-docente" placeholder="Motivo"></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id="docente-container">
+                <!-- Primera fila: Labels -->
+                <div class="row">
+                    <div class="col-md-2">
+                        <label class="form-label"><strong>Docente</strong></label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label"><strong>Materia</strong></label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label"><strong>Grado</strong></label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label"><strong>Turno</strong></label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label"><strong>Módulos</strong></label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label"><strong>Motivo</strong></label>
+                    </div>
+                </div>
+                <!-- Segunda fila: Inputs -->
+                <div class="row mb-3 docente-row">
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" name="docente" placeholder="Apellido y Nombre">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" name="materia" placeholder="Materia">
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select" name="grado" onchange="actualizarTurno(this)">
+                            <option value="" selected disabled>Seleccione el Grado</option>
+                            <option value="1ro 1ra">1ro 1ra</option>
+                            <option value="1ro 2da">1ro 2da</option>
+                            <option value="1ro 3ra">1ro 3ra</option>
+                            <option value="2do 1ra">2do 1ra</option>
+                            <option value="2do 2da">2do 2da</option>
+                            <option value="2do 3ra">2do 3ra</option>
+                            <option value="3ro primera">3ro primera</option>
+                            <option value="3ro 2da">3ro 2da</option>
+                            <option value="4to 1ra">4to 1ra</option>
+                            <option value="4to 2da">4to 2da</option>
+                            <option value="5to 1ra">5to 1ra</option>
+                            <option value="6to 1ra">6to 1ra</option>
+                            <option value="6to 2da">6to 2da</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" name="turno" placeholder="Turno" readonly>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control" name="modulos" placeholder="Cantidad">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" name="motivo-docente" placeholder="Motivo">
+                    </div>
+                </div>
+            </div>
             <button type="button" class="btn btn-secondary mb-3" id="add-docente">Agregar Docente</button>
 
             <!-- Personal de Cargo -->
             <h5 class="mt-4">Personal de Cargo</h5>
-            <table class="table table-bordered">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Función</th>
-                        <th>Turno</th>
-                    </tr>
-                </thead>
-                <tbody id="cargo-container">
-                    <tr class="cargo-row">
-                        <td><input type="text" class="form-control" name="nombre-cargo" placeholder="Nombre"></td>
-                        <td><input type="text" class="form-control" name="apellido-cargo" placeholder="Apellido"></td>
-                        <td><input type="text" class="form-control" name="funcion-cargo" placeholder="Función"></td>
-                        <td><input type="text" class="form-control" name="turno-cargo" placeholder="Turno"></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id="cargo-container">
+                <!-- Primera fila: Labels -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="form-label"><strong>Nombre</strong></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label"><strong>Apellido</strong></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label"><strong>Función</strong></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label"><strong>Turno</strong></label>
+                    </div>
+                </div>
+                <!-- Segunda fila: Inputs -->
+                <div class="row mb-3 cargo-row">
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="nombre-cargo" placeholder="Nombre">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="apellido-cargo" placeholder="Apellido">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="funcion-cargo" placeholder="Función">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="turno-cargo" placeholder="Turno">
+                    </div>
+                </div>
+            </div>
             <button type="button" class="btn btn-secondary mb-3" id="add-cargo">Agregar Personal de Cargo</button>
 
             <!-- Personal Auxiliar -->
             <h5 class="mt-4">Personal Auxiliar</h5>
-            <table class="table table-bordered">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Motivo</th>
-                        <th>Turno</th>
-                    </tr>
-                </thead>
-                <tbody id="auxiliar-container">
-                    <tr class="auxiliar-row">
-                        <td><input type="text" class="form-control" name="nombre-auxiliar" placeholder="Nombre"></td>
-                        <td><input type="text" class="form-control" name="apellido-auxiliar" placeholder="Apellido"></td>
-                        <td><input type="text" class="form-control" name="motivo-auxiliar" placeholder="Motivo"></td>
-                        <td><input type="text" class="form-control" name="turno-auxiliar" placeholder="Turno"></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id="auxiliar-container">
+                <!-- Primera fila: Labels -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="form-label"><strong>Nombre</strong></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label"><strong>Apellido</strong></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label"><strong>Motivo</strong></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label"><strong>Turno</strong></label>
+                    </div>
+                </div>
+                <!-- Segunda fila: Inputs -->
+                <div class="row mb-3 auxiliar-row">
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="nombre-auxiliar" placeholder="Nombre">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="apellido-auxiliar" placeholder="Apellido">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="motivo-auxiliar" placeholder="Motivo">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="turno-auxiliar" placeholder="Turno">
+                    </div>
+                </div>
+            </div>
             <button type="button" class="btn btn-secondary mb-3" id="add-auxiliar">Agregar Personal Auxiliar</button>
 
             <!-- Contraseña para generar PDF -->
