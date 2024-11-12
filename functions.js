@@ -17,7 +17,7 @@ function mostrarDiaSemana() {
 function actualizarTurno(selectElement) {
     const grado = selectElement.value.toLowerCase();
     let turno = '';
-    if (["1ro 1ra", "2do 1ra", "3ro primera", "4to 1ra", "5to", "6to 2da"].includes(grado)) {
+    if (["1ro 1ra", "2do 1ra", "3ro primera", "4to 1ra", "5to 2da", "6to 2da"].includes(grado)) {
         turno = 'Mañana';
     } else if (["1ro 2da", "1ro 3ra", "2do 2da", "2do 3ra", "3ro 2da"].includes(grado)) {
         turno = 'Tarde';
