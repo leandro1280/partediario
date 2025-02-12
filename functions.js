@@ -190,6 +190,42 @@ function generarPDF() {
         });
     }
 
+    y += 10;
+
+    // Llegadas Tarde / Se Retiró Temprano
+    doc.setFont('helvetica', 'bold');
+    doc.text("Llegadas Tarde / Se Retiró Temprano", x, y);
+    y += 10;
+    doc.setFont('helvetica', 'normal');
+
+    const llegadas = document.querySelectorAll('.llegadas-row');
+    if (llegadas.length === 0) {
+        doc.text("No hay datos de llegadas tarde o retiros tempranos.", x, y);
+        y += 10;
+    } else {
+        llegadas.forEach((row) => {
+            const nombre = row.querySelector('input[name="nombre-llegadas"]').value || '';
+            const apellido = row.querySelector('input[name="apellido-llegadas"]').value || '';
+            const motivo = row.querySelector('input[name="motivo-llegadas"]').value || '';
+            const hora = row.querySelector('input[name="hora-llegadas"]').value || '';
+
+            // Primera línea: etiquetas y datos principales
+            const linea1 = `Nombre: ${nombre} ${apellido}`;
+            doc.text(linea1, x, y);
+            y += 10;
+
+            // Segunda línea: datos adicionales
+            const linea2 = `Motivo: ${motivo} | Hora: ${hora}`;
+            doc.text(linea2, x, y);
+            y += 15;
+
+            if (y > 270) {
+                doc.addPage();
+                y = 20;
+            }
+        });
+    }
+
     // Descargar el PDF con el nombre personalizado con la fecha
     doc.save(`parte-diario-${fecha}.pdf`);
 }
@@ -243,6 +279,19 @@ function actualizarVistaPrevia() {
             Turno: ${turno}</p>`;
     });
 
+    // Llegadas Tarde / Se Retiró Temprano
+    document.querySelectorAll('.llegadas-row').forEach((row, index) => {
+        const nombre = row.querySelector('input[name="nombre-llegadas"]').value;
+        const apellido = row.querySelector('input[name="apellido-llegadas"]').value;
+        const motivo = row.querySelector('input[name="motivo-llegadas"]').value;
+        const hora = row.querySelector('input[name="hora-llegadas"]').value;
+
+        contenido += `<p><strong>Llegada Tarde / Retiro Temprano ${index + 1}:</strong><br>
+            Nombre: ${nombre} ${apellido}<br>
+            Motivo: ${motivo}<br>
+            Hora: ${hora}</p>`;
+    });
+
     vistaPrevia.innerHTML = contenido;
 }
 
@@ -280,6 +329,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <option value="4to 1ra">4to 1ra</option>
                     <option value="4to 2da">4to 2da</option>
                     <option value="5to 1ra">5to 1ra</option>
+                    <option value="5to 2da">5to 2da</option>
                     <option value="6to 1ra">6to 1ra</option>
                     <option value="6to 2da">6to 2da</option>
                 </select>
@@ -343,5 +393,29 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
         `;
         container.appendChild(newAuxiliarRow);
+    });
+
+    // Evento para agregar nueva llegada tarde / retiro temprano
+    document.getElementById('add-llegadas').addEventListener('click', function() {
+        let container = document.getElementById('llegadas-container');
+
+        let newLlegadasRow = document.createElement('div');
+        newLlegadasRow.classList.add('row', 'mb-3', 'llegadas-row');
+
+        newLlegadasRow.innerHTML = `
+            <div class="col-md-3">
+                <input type="text" class="form-control" name="nombre-llegadas" placeholder="Nombre">
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" name="apellido-llegadas" placeholder="Apellido">
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" name="motivo-llegadas" placeholder="Motivo">
+            </div>
+            <div class="col-md-3">
+                <input type="time" class="form-control" name="hora-llegadas" placeholder="Hora">
+            </div>
+        `;
+        container.appendChild(newLlegadasRow);
     });
 });
