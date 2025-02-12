@@ -45,7 +45,6 @@ function generarPDF() {
     // Verificar si la librería jsPDF está cargada
     const { jsPDF } = window.jspdf || {};
     if (!jsPDF) {
-        // Manejo de errores para jsPDF no cargada
         alert("Error: La librería jsPDF no está cargada.");
         return;
     }
@@ -84,14 +83,26 @@ function generarPDF() {
     doc.setFont('helvetica', 'bold');
     doc.text("Novedades del Personal - Docentes", x, y);
     y += 10;
-    doc.setFont('helvetica', 'normal');
 
     // Verificar si hay datos de docentes
     const docentes = document.querySelectorAll('.docente-row');
     if (docentes.length === 0) {
+        doc.setFont('helvetica', 'normal');
         doc.text("No hay datos de docentes.", x, y);
         y += 10;
     } else {
+        // Títulos de las columnas
+        doc.setFont('helvetica', 'bold');
+        doc.text("Docente", x, y);
+        doc.text("Materia", x + 40, y);
+        doc.text("Grado", x + 80, y);
+        doc.text("Turno", x + 120, y);
+        doc.text("Módulos", x + 160, y);
+        doc.text("Motivo", x + 200, y);
+        y += 10;
+
+        // Datos de los docentes
+        doc.setFont('helvetica', 'normal');
         docentes.forEach((row) => {
             const docente = row.querySelector('input[name="docente"]').value || '';
             const materia = row.querySelector('input[name="materia"]').value || '';
@@ -100,15 +111,13 @@ function generarPDF() {
             const modulos = row.querySelector('input[name="modulos"]').value || '';
             const motivo = row.querySelector('input[name="motivo-docente"]').value || '';
 
-            // Primera línea: etiquetas y datos principales
-            const linea1 = `Docente: ${docente} | Materia: ${materia}`;
-            doc.text(linea1, x, y);
+            doc.text(docente, x, y);
+            doc.text(materia, x + 40, y);
+            doc.text(grado, x + 80, y);
+            doc.text(turno, x + 120, y);
+            doc.text(modulos, x + 160, y);
+            doc.text(motivo, x + 200, y);
             y += 10;
-
-            // Segunda línea: datos adicionales
-            const linea2 = `Grado: ${grado} | Turno: ${turno} | Módulos: ${modulos} | Motivo: ${motivo}`;
-            doc.text(linea2, x, y);
-            y += 15; // Aumentar el espacio para separar entre docentes
 
             // Verificar si hay que agregar una nueva página
             if (y > 270) {
@@ -118,34 +127,40 @@ function generarPDF() {
         });
     }
 
-    y += 10;
+    y += 20;
 
     // Personal de Cargo
     doc.setFont('helvetica', 'bold');
     doc.text("Personal de Cargo", x, y);
     y += 10;
-    doc.setFont('helvetica', 'normal');
 
     const cargos = document.querySelectorAll('.cargo-row');
     if (cargos.length === 0) {
+        doc.setFont('helvetica', 'normal');
         doc.text("No hay datos de personal de cargo.", x, y);
         y += 10;
     } else {
+        // Títulos de las columnas
+        doc.setFont('helvetica', 'bold');
+        doc.text("Nombre", x, y);
+        doc.text("Apellido", x + 40, y);
+        doc.text("Función", x + 80, y);
+        doc.text("Turno", x + 120, y);
+        y += 10;
+
+        // Datos del personal de cargo
+        doc.setFont('helvetica', 'normal');
         cargos.forEach((row) => {
             const nombre = row.querySelector('input[name="nombre-cargo"]').value || '';
             const apellido = row.querySelector('input[name="apellido-cargo"]').value || '';
             const funcion = row.querySelector('input[name="funcion-cargo"]').value || '';
             const turno = row.querySelector('input[name="turno-cargo"]').value || '';
 
-            // Primera línea: etiquetas y datos principales
-            const linea1 = `Nombre: ${nombre} ${apellido}`;
-            doc.text(linea1, x, y);
+            doc.text(nombre, x, y);
+            doc.text(apellido, x + 40, y);
+            doc.text(funcion, x + 80, y);
+            doc.text(turno, x + 120, y);
             y += 10;
-
-            // Segunda línea: datos adicionales
-            const linea2 = `Función: ${funcion} | Turno: ${turno}`;
-            doc.text(linea2, x, y);
-            y += 15;
 
             if (y > 270) {
                 doc.addPage();
@@ -154,34 +169,40 @@ function generarPDF() {
         });
     }
 
-    y += 10;
+    y += 20;
 
     // Personal Auxiliar
     doc.setFont('helvetica', 'bold');
     doc.text("Personal Auxiliar", x, y);
     y += 10;
-    doc.setFont('helvetica', 'normal');
 
     const auxiliares = document.querySelectorAll('.auxiliar-row');
     if (auxiliares.length === 0) {
+        doc.setFont('helvetica', 'normal');
         doc.text("No hay datos de personal auxiliar.", x, y);
         y += 10;
     } else {
+        // Títulos de las columnas
+        doc.setFont('helvetica', 'bold');
+        doc.text("Nombre", x, y);
+        doc.text("Apellido", x + 40, y);
+        doc.text("Motivo", x + 80, y);
+        doc.text("Turno", x + 120, y);
+        y += 10;
+
+        // Datos del personal auxiliar
+        doc.setFont('helvetica', 'normal');
         auxiliares.forEach((row) => {
             const nombre = row.querySelector('input[name="nombre-auxiliar"]').value || '';
             const apellido = row.querySelector('input[name="apellido-auxiliar"]').value || '';
             const motivo = row.querySelector('input[name="motivo-auxiliar"]').value || '';
             const turno = row.querySelector('input[name="turno-auxiliar"]').value || '';
 
-            // Primera línea: etiquetas y datos principales
-            const linea1 = `Nombre: ${nombre} ${apellido}`;
-            doc.text(linea1, x, y);
+            doc.text(nombre, x, y);
+            doc.text(apellido, x + 40, y);
+            doc.text(motivo, x + 80, y);
+            doc.text(turno, x + 120, y);
             y += 10;
-
-            // Segunda línea: datos adicionales
-            const linea2 = `Motivo: ${motivo} | Turno: ${turno}`;
-            doc.text(linea2, x, y);
-            y += 15;
 
             if (y > 270) {
                 doc.addPage();
@@ -190,34 +211,43 @@ function generarPDF() {
         });
     }
 
-    y += 10;
+    y += 20;
 
     // Llegadas Tarde / Se Retiró Temprano
     doc.setFont('helvetica', 'bold');
     doc.text("Llegadas Tarde / Se Retiró Temprano", x, y);
     y += 10;
-    doc.setFont('helvetica', 'normal');
 
     const llegadas = document.querySelectorAll('.llegadas-row');
     if (llegadas.length === 0) {
+        doc.setFont('helvetica', 'normal');
         doc.text("No hay datos de llegadas tarde o retiros tempranos.", x, y);
         y += 10;
     } else {
+        // Títulos de las columnas
+        doc.setFont('helvetica', 'bold');
+        doc.text("Tipo", x, y);
+        doc.text("Nombre", x + 30, y);
+        doc.text("Apellido", x + 70, y);
+        doc.text("Motivo", x + 110, y);
+        doc.text("Hora", x + 150, y);
+        y += 10;
+
+        // Datos de llegadas tarde / retiros tempranos
+        doc.setFont('helvetica', 'normal');
         llegadas.forEach((row) => {
+            const tipo = row.querySelector('select[name="tipo-llegadas"]').value || '';
             const nombre = row.querySelector('input[name="nombre-llegadas"]').value || '';
             const apellido = row.querySelector('input[name="apellido-llegadas"]').value || '';
             const motivo = row.querySelector('input[name="motivo-llegadas"]').value || '';
             const hora = row.querySelector('input[name="hora-llegadas"]').value || '';
 
-            // Primera línea: etiquetas y datos principales
-            const linea1 = `Nombre: ${nombre} ${apellido}`;
-            doc.text(linea1, x, y);
+            doc.text(tipo, x, y);
+            doc.text(nombre, x + 30, y);
+            doc.text(apellido, x + 70, y);
+            doc.text(motivo, x + 110, y);
+            doc.text(hora, x + 150, y);
             y += 10;
-
-            // Segunda línea: datos adicionales
-            const linea2 = `Motivo: ${motivo} | Hora: ${hora}`;
-            doc.text(linea2, x, y);
-            y += 15;
 
             if (y > 270) {
                 doc.addPage();
@@ -281,12 +311,14 @@ function actualizarVistaPrevia() {
 
     // Llegadas Tarde / Se Retiró Temprano
     document.querySelectorAll('.llegadas-row').forEach((row, index) => {
+        const tipo = row.querySelector('select[name="tipo-llegadas"]').value;
         const nombre = row.querySelector('input[name="nombre-llegadas"]').value;
         const apellido = row.querySelector('input[name="apellido-llegadas"]').value;
         const motivo = row.querySelector('input[name="motivo-llegadas"]').value;
         const hora = row.querySelector('input[name="hora-llegadas"]').value;
 
         contenido += `<p><strong>Llegada Tarde / Retiro Temprano ${index + 1}:</strong><br>
+            Tipo: ${tipo}<br>
             Nombre: ${nombre} ${apellido}<br>
             Motivo: ${motivo}<br>
             Hora: ${hora}</p>`;
@@ -403,6 +435,14 @@ document.addEventListener('DOMContentLoaded', function () {
         newLlegadasRow.classList.add('row', 'mb-3', 'llegadas-row');
 
         newLlegadasRow.innerHTML = `
+            <div class="col-md-3">
+                <select class="form-select" name="tipo-llegadas">
+                    <option value="" selected disabled>Seleccione el Tipo</option>
+                    <option value="Docente">Docente</option>
+                    <option value="Personal de Cargo">Personal de Cargo</option>
+                    <option value="Personal Auxiliar">Personal Auxiliar</option>
+                </select>
+            </div>
             <div class="col-md-3">
                 <input type="text" class="form-control" name="nombre-llegadas" placeholder="Nombre">
             </div>
