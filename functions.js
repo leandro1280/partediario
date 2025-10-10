@@ -19,7 +19,7 @@ function actualizarTurno(selectElement) {
     let turno = '';
     if (["1ro 1ra", "2do 1ra", "3ro primera", "4to 1ra", "5to 2da", "6to 2da"].includes(grado)) {
         turno = 'Mañana';
-    } else if (["1ro 2da", "1ro 3ra", "2do 2da", "2do 3ra", "3ro 2da"].includes(grado)) {
+    } else if (["1ro 2da", "1ro 3ra", "2do 2da", "2do 3ra", "3ro 2da","3ro 3ra"].includes(grado)) {
         turno = 'Tarde';
     } else if (["4to 2da", "5to 1ra", "6to 1ra"].includes(grado)) {
         turno = 'Vespertino';
@@ -145,7 +145,7 @@ function generarPDF() {
         doc.text("Nombre", x, y);
         doc.text("Apellido", x + 40, y);
         doc.text("Función", x + 80, y);
-        doc.text("Turno", x + 120, y);
+        doc.text("Motivo", x + 120, y);
         y += 10;
 
         // Datos del personal de cargo
@@ -154,7 +154,7 @@ function generarPDF() {
             const nombre = row.querySelector('input[name="nombre-cargo"]').value || '';
             const apellido = row.querySelector('input[name="apellido-cargo"]').value || '';
             const funcion = row.querySelector('input[name="funcion-cargo"]').value || '';
-            const turno = row.querySelector('input[name="turno-cargo"]').value || '';
+            const turno = row.querySelector('input[name="Motivo-cargo"]').value || '';
 
             doc.text(nombre, x, y);
             doc.text(apellido, x + 40, y);
@@ -356,8 +356,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     <option value="2do 1ra">2do 1ra</option>
                     <option value="2do 2da">2do 2da</option>
                     <option value="2do 3ra">2do 3ra</option>
-                    <option value="3ro primera">3ro primera</option>
+                    <option value="3ro 1ra">3ro 1ra</option>
                     <option value="3ro 2da">3ro 2da</option>
+                     <option value="3ro 3ra">3ro 3ra</option>
                     <option value="4to 1ra">4to 1ra</option>
                     <option value="4to 2da">4to 2da</option>
                     <option value="5to 1ra">5to 1ra</option>
@@ -459,3 +460,4 @@ document.addEventListener('DOMContentLoaded', function () {
         container.appendChild(newLlegadasRow);
     });
 });
+
